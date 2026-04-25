@@ -284,3 +284,6 @@ for dept in depts_to_show:
     
     st.markdown(interventions[dept])
     st.divider()
+
+    # --- Footer ---
+st.markdown("<p style='text-align:center; color:grey;'>© 2026 Version 0 Built by Mithirendra Maniam</p>", unsafe_allow_html=True)
