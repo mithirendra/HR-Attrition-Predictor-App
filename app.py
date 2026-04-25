@@ -134,7 +134,7 @@ def color_risk(val):
         return 'background-color: #FCEBEB; color: #A32D2D; font-weight: bold'
     return 'background-color: #EAF3DE; color: #3B6D11; font-weight: bold'
 
-styled = filtered[display_cols].style.applymap(
+styled = filtered[display_cols].style.map(
     color_risk, subset=['risk_level']
 ).set_properties(subset=['tenure', 'risk_level', 'risk_score'], **{'text-align': 'center'})
 
@@ -239,7 +239,7 @@ def color_high_risk(val):
         return 'background-color: #FAEEDA; color: #854F0B; font-weight: bold'
     return 'background-color: #EAF3DE; color: #3B6D11; font-weight: bold'
 
-styled_heatmap = heatmap_data.style.applymap(
+styled_heatmap = heatmap_data.style.map(
     color_high_risk, subset=['High Risk %']
 )
 
