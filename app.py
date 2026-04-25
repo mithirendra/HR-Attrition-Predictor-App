@@ -110,7 +110,7 @@ st.divider()
 # Section 5 — Employee flight risk table
 # ------------------------------------
 # --- Section 5: Employee Flight Risk Table ---
-st.markdown("### Employee Flight Risk — NovaTech Solutions")
+st.markdown("### Employee Flight Risk — MM Group")
 st.caption("Click column headers to sort. Filter by department and role level above.")
 
 # Apply filters to top10 data
