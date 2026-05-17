@@ -62,7 +62,7 @@ df_2025['risk_score'] = (probabilities * 100).round(1)
 # Assign risk levels based on score thresholds
 df_2025['risk_level'] = pd.cut(
     df_2025['risk_score'],
-    bins=[-0.1, 80, 100],
+    bins=[-0.1, 50, 100],
     labels=['Low', 'High']
 )
 

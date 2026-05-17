@@ -10,13 +10,45 @@ import pandas as pd
 import numpy as np
 import json
 import joblib
+import base64
+
+def get_image_base64(image_path):
+    with open(image_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+logo_base64 = get_image_base64("assets/mitma_logo.png")
 
 # --- Page config --- must be first Streamlit command
 st.set_page_config(
-    page_title="Attrition Predictor",
-    # page_icon="🎯",
+    page_title="Attrition Predictor — Demo Version | Mitma Consulting",
+    page_icon="assets/mitma_favicon.png",
     layout="wide"
 )
+
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif !important;
+}
+            
+.stApp {
+    background-color: #fffbf8;
+}
+            
+/* Selectbox styling */
+.stSelectbox > div > div {
+    background-color: #ffece1 !important;
+}
+
+.mitma-btn:hover {
+   background:#505050 !important;
+   transition: background 0.2s ease;
+}
+            
+</style>
+""", unsafe_allow_html=True)
 
 # --- Version flag ---
 API_ENABLED = False
@@ -40,7 +72,31 @@ dept_summary, top10, dept_trends, emp_trends, interventions, feature_importance 
 # Section 2 — Banner, metadata
 # ------------------------------------
 # --- Banner ---
-st.markdown("## Attrition Predictor")
+st.markdown(f"""
+<div style="display:flex; align-items:center; gap:20px; margin-bottom:10px;">
+    <a href="https://mitmaconsulting.framer.ai/" target="_blank">
+        <img src="data:image/png;base64,{logo_base64}" height="50"/>
+    </a>
+    <div>
+        <h4 style="margin:0; padding:0; color:#000000">Attrition Predictor — Demo Version</h4>
+        <p style="margin:0; padding:0; color:grey;">By Mitma Consulting</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# --- Demo Notice ---
+st.markdown(f"""
+<div style="background:#ffece1; border-radius:12px; padding:16px 24px; margin-bottom:16px; border-left:4px solid #f49052;">
+    <p style="margin:0; color:#5a3e36; font-size:14px;">
+        ⚠️ <strong>This is a Demo Version with limited view.</strong> 
+        Contact Mitma Consulting to get access to the <strong>Full Version</strong>.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+
+st.markdown("---")
+
 st.markdown("""
 An AI-powered tool that identifies which employees are at risk of leaving. 
 The model scores each employee by flight risk level, surfaces the key drivers 
@@ -56,6 +112,7 @@ with col2:
     st.success("🟢 Connected to employee master data")
 
 st.divider()
+
 
 # --- Metadata ---
 st.markdown("**Data source:** HRIS · Employee Master")
@@ -110,7 +167,10 @@ st.divider()
 # Section 5 — Employee flight risk table
 # ------------------------------------
 # --- Section 5: Employee Flight Risk Table ---
-st.markdown("### Employee Flight Risk — MM Group")
+st.markdown("""
+<h4 style="color:#f49052;">Employee Flight Risk — MM Group</h4>
+""", unsafe_allow_html=True)
+
 st.caption("Click column headers to sort. Filter by department and role level above.")
 
 # Apply filters to top10 data
@@ -156,7 +216,9 @@ st.divider()
 # Section 6 — 5-year behavioural trend
 # ------------------------------------
 # --- Section 6: 5-Year Behavioural Trend ---
-st.markdown("### 5-Year Behavioural Trend")
+st.markdown("""
+<h4 style="color:#f49052;">5-Year Behavioural Trend</h4>
+""", unsafe_allow_html=True)
 
 trend_cols = ['engagement_score', 'engagement_activity', 'online_learning',
               'f2f_learning', 'absenteeism', 'overtime_hours']
@@ -196,7 +258,9 @@ st.divider()
 # Section 7 — Top attrition driver
 # ------------------------------------
 # --- Section 7: Top Attrition Drivers ---
-st.markdown("### Top Attrition Drivers")
+st.markdown("""
+<h4 style="color:#f49052;">Top Attrition Drivers</h4>
+""", unsafe_allow_html=True)
 
 # Show top 10 drivers
 top_drivers = feature_importance.head(10)
@@ -206,7 +270,12 @@ for _, row in top_drivers.iterrows():
     with col1:
         st.markdown(f"**{row['feature'].replace('_', ' ').title()}**")
     with col2:
-        st.progress(float(row['importance']) / float(feature_importance['importance'].max()))
+        pct = float(row['importance']) / float(feature_importance['importance'].max())
+        st.markdown(f"""
+        <div style="background:#f0e6d3; border-radius:4px; height:8px; margin-top:6px;">
+            <div style="background:#f49052; width:{pct*100:.1f}%; height:8px; border-radius:4px;"></div>
+        </div>
+        """, unsafe_allow_html=True)
     with col3:
         st.caption(f"{row['importance']:.3f}")
 
@@ -217,7 +286,9 @@ st.divider()
 # Section 8 — Department heatmap
 # ------------------------------------
 # --- Section 8: Department Heatmap ---
-st.markdown("### Department Heatmap")
+st.markdown("""
+<h4 style="color:#f49052;">Department Heatmap</h4>
+""", unsafe_allow_html=True)
 
 
 # Pivot for display
@@ -233,9 +304,9 @@ if selected_dept != 'All':
 
 # Color high risk column
 def color_high_risk(val):
-    if val >= 25:
+    if val >= 12:
         return 'background-color: #FCEBEB; color: #A32D2D; font-weight: bold'
-    elif val >= 15:
+    elif val >= 10:
         return 'background-color: #FAEEDA; color: #854F0B; font-weight: bold'
     return 'background-color: #EAF3DE; color: #3B6D11; font-weight: bold'
 
@@ -260,7 +331,9 @@ st.divider()
 # Section 9 — Interventions:
 # ------------------------------------
 # --- Section 9: Interventions ---
-st.markdown("### Recommended Interventions by Department")
+st.markdown("""
+<h4 style="color:#f49052;">Recommended Interventions by Department</h4>
+""", unsafe_allow_html=True)
 st.caption(f"Generated by rule-based model · Version 0")
 
 # Filter by selected department
@@ -285,5 +358,27 @@ for dept in depts_to_show:
     st.markdown(interventions[dept])
     st.divider()
 
-    # --- Footer ---
-st.markdown("<p style='text-align:center; color:grey;'>© 2026 Version 0 Built by Mithirendra Maniam</p>", unsafe_allow_html=True)
+# --- Promo Banner ---
+st.markdown(f"""
+<div style="background:#ffece1; border-radius:12px; padding:30px; text-align:center; margin:20px 0;">
+    <p style="color:#5a3e36; font-size:16px; margin-bottom:16px;">Looking for a custom HR intelligence tool for your organisation?</p>
+    <a href="https://mitmaconsulting.framer.ai/" target="_blank">
+        <img src="data:image/png;base64,{logo_base64}" width="120" style="margin-bottom:16px;"/>
+    </a>
+    <br/>
+    <a href="https://mitmaconsulting.framer.ai/contact" target="_blank" class="mitma-btn" style="background:#f49052; color:white; padding:10px 24px; border-radius:8px; text-decoration:none; margin-right:12px; font-weight:600;">Contact Mitma Consulting</a>
+    <a href="https://www.linkedin.com/in/mithirendra-maniam/" target="_blank" class="mitma-btn" style="background:#f49052; color:white; padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:600;">Connect on LinkedIn</a>
+</div>
+""", unsafe_allow_html=True)
+
+# --- Footer ---
+st.markdown("""
+<div style='text-align:center;padding:20px 0 10px;
+            font-size:11px;color:#c0a080;
+            border-top:0.5px solid #f0d0b8;
+            margin-top:40px;
+            font-family:Montserrat,sans-serif;'>
+    © 2026 Mitma Consulting · Attrition Predictor Demo Version 0 ·
+    Built by Mithirendra Maniam
+</div>
+""", unsafe_allow_html=True)

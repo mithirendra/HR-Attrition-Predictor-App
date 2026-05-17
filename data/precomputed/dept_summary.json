@@ -2,57 +2,57 @@
   {
     "department":"Finance",
     "total":509,
-    "high_risk":99,
-    "high_risk_pct":19.4,
-    "low_risk":410,
-    "low_risk_pct":80.6
+    "high_risk":56,
+    "high_risk_pct":11.0,
+    "low_risk":453,
+    "low_risk_pct":89.0
   },
   {
     "department":"HR",
     "total":295,
-    "high_risk":47,
-    "high_risk_pct":15.9,
-    "low_risk":248,
-    "low_risk_pct":84.1
+    "high_risk":31,
+    "high_risk_pct":10.5,
+    "low_risk":264,
+    "low_risk_pct":89.5
   },
   {
     "department":"Legal",
     "total":214,
-    "high_risk":42,
-    "high_risk_pct":19.6,
-    "low_risk":172,
-    "low_risk_pct":80.4
+    "high_risk":24,
+    "high_risk_pct":11.2,
+    "low_risk":190,
+    "low_risk_pct":88.8
   },
   {
     "department":"Marketing",
     "total":602,
-    "high_risk":114,
-    "high_risk_pct":18.9,
-    "low_risk":488,
-    "low_risk_pct":81.1
+    "high_risk":71,
+    "high_risk_pct":11.8,
+    "low_risk":531,
+    "low_risk_pct":88.2
   },
   {
     "department":"Retail",
     "total":856,
-    "high_risk":154,
-    "high_risk_pct":18.0,
-    "low_risk":702,
-    "low_risk_pct":82.0
+    "high_risk":79,
+    "high_risk_pct":9.2,
+    "low_risk":777,
+    "low_risk_pct":90.8
   },
   {
     "department":"Sales",
     "total":1116,
-    "high_risk":218,
-    "high_risk_pct":19.5,
-    "low_risk":898,
-    "low_risk_pct":80.5
+    "high_risk":113,
+    "high_risk_pct":10.1,
+    "low_risk":1003,
+    "low_risk_pct":89.9
   },
   {
     "department":"Technology",
     "total":1408,
-    "high_risk":287,
-    "high_risk_pct":20.4,
-    "low_risk":1121,
-    "low_risk_pct":79.6
+    "high_risk":137,
+    "high_risk_pct":9.7,
+    "low_risk":1271,
+    "low_risk_pct":90.3
   }
 ]
